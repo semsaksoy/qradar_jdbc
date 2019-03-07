@@ -4,10 +4,14 @@ require "uri"
 require 'date'
 require "json"
 
+#disable-enable jdbc log sources that do not get event for longer than threshold
+
 ##config
 @sec = "cc947788-xxxxxxxx"
 @host="https://127.0.0.1"
+@threshold=2 #hours
 ##config
+
 
 
 def get_logsource
@@ -24,7 +28,8 @@ def get_logsource
   }
   data=JSON.parse(res.body)
 
-  data= data.select { |s| s["protocol_type_id"]==8 && s["internal"]!=true && s["enabled"]==true && ((DateTime.now- DateTime.strptime(s["last_event_time"].to_s, '%Q'))*24).to_i>=2 }
+  data= data.select { |s| s["protocol_type_id"]==8 && s["internal"]!=true && s["enabled"]==true &&
+      ((DateTime.now- DateTime.strptime(s["last_event_time"].to_s, '%Q'))*24).to_i>=@threshold }
   cikti= data.map { |s| s["id"] }
 
   get_logsource=cikti
