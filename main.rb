@@ -5,6 +5,11 @@ require 'date'
 require "json"
 
 #disable-enable jdbc log sources that do not get event for longer than threshold
+#cron installation
+## DB log sources restart
+##20 * * * * /bin/ruby /root/AutoDE/main.rb >/dev/null 2>&1
+
+
 
 ##config
 @sec = "cc947788-xxxxxxxx"
@@ -76,4 +81,4 @@ end
 liste= get_logsource
 e_d liste
 
-#/bin/ruby /root/AutoDE/main.rb
+
