@@ -2,12 +2,12 @@ Qradar JDBC Workaround
 
 "QRadar supports many protocols. Passive protocols listen to events on specific ports. Active protocols use APIs or other communication tools to poll events and connect to external systems."
 
-JDBC is an active protocol that sends "SELECT" queries to any relational database. Sometimes there may be a connection issue between qradar and database servers. In which case, qradar will  retry connect and gives up after a few attempts. The log source will not work even if the connection is established. Qradar documents suggests disable-enable log source.
+JDBC is an active protocol that sends "SELECT" queries to any relational database. Sometimes there may be a connection issue between qradar and database servers. In which case, qradar will  retry connect and give up after a few attempts. The log source will not work even if the connection is established. In case this happens, Qradar documents suggest restarting the log source via enable-disable.
 
-This script will disable and enable jdbc log sources for you which not get events in determined treshold time.
+This script will restart jdbc log sources automatically if they have been inactive for a given period of time. 
 
 
-Auto disable-enable jdbc log sources on Qradar SIEM after connection problem by using API
+Auto restart jdbc log sources on Qradar SIEM after connection problem by using API
 
 
 #disable-enable jdbc log sources that do not get event for longer than threshold
